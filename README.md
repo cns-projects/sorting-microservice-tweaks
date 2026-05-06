@@ -2,14 +2,16 @@
 
 ## Description
 
-The Sorting Microservice takes a JSON object containing a list of races and a sorting type, sorts the races by either distance or date, and returns the sorted race list as a JSON object.
+The Sorting Microservice takes a JSON object containing a list of fitness activities and a sorting type, sorts the activities by either distance or date, and returns the sorted activity list as a JSON object.
+
+This microservice can be used in applications related to running, hiking, cycling, walking, or other fitness tracking systems.
 
 ---
 
 ## How to REQUEST Data
 
 Request data by sending a JSON object with:
-- a list of races
+- a list of activities
 - a sorting type
 
 Send the request to:
@@ -28,14 +30,14 @@ fetch('http://localhost:3002/sort', {
     },
     body: JSON.stringify({
         sortBy: "distance",
-        races: [
+        activities: [
             {
-                name: "10K Race",
-                distance: 10,
+                title: "Mountain Hike",
+                distance: 12,
                 date: "2026-04-01"
             },
             {
-                name: "5K Race",
+                title: "Morning Run",
                 distance: 5,
                 date: "2026-03-01"
             }
@@ -48,20 +50,20 @@ fetch('http://localhost:3002/sort', {
 
 ## How to RECEIVE Data
 
-Receive a JSON array containing the sorted races.
+Receive a JSON array containing the sorted activities.
 
 ### Example Response
 
 ```json
 [
     {
-        "name": "5K Race",
+        "title": "Morning Run",
         "distance": 5,
         "date": "2026-03-01"
     },
     {
-        "name": "10K Race",
-        "distance": 10,
+        "title": "Mountain Hike",
+        "distance": 12,
         "date": "2026-04-01"
     }
 ]
