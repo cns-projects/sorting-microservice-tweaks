@@ -28,8 +28,8 @@ def sort_distance():
     # Check if required field is present
     if "distance" not in data:
         return jsonify({
-        "error": "Missing required field 'distance'"
-    }), 400
+            "error": "Missing required field 'distance'"
+        }), 400
     
     # Sort data by distance
     sorted_items = sorted(
@@ -49,7 +49,7 @@ def sort_date():
 
     # Check if data is in array format
     if not isinstance(data, list):
-         return jsonify({
+        return jsonify({
             "error": "Expected array in request body"
         }), 400
     
