@@ -25,6 +25,12 @@ def sort_distance():
             "error": "Expected array in request body"
         }), 400
     
+    # Check if required field is present
+    if "distance" not in data:
+        return jsonify({
+        "error": "Missing required field 'distance'"
+    }), 400
+    
     # Sort data by distance
     sorted_items = sorted(
         data,
@@ -34,42 +40,33 @@ def sort_distance():
     # Return sorted data
     return jsonify(sorted_items)
 
-# Sorting endpoint
-@app.route('/sort', methods=['POST'])
-def sort_races():
+# Sort data by date field
+@app.route('/sort/date', methods=['POST'])
+def sort_date():
 
     # Get JSON data from request
     data = request.get_json()
 
-    # Get races list
-    races = data.get('races', [])
-
-    # Get sorting type
-    sort_by = data.get('sortBy', 'date')
-
-    # Sort by distance
-    if sort_by == 'distance':
-        sorted_races = sorted(
-            races,
-            key=lambda race: race.get('distance', 0)
-        )
-
-    # Sort by date
-    elif sort_by == 'date':
-        sorted_races = sorted(
-            races,
-            key=lambda race: race.get('date', '')
-        )
-
-    # Invalid sort type
-    else:
-        return jsonify({
-            "error": "Invalid sort type"
+    # Check if data is in array format
+    if not isinstance(data, list):
+         return jsonify({
+            "error": "Expected array in request body"
         }), 400
+    
+     # Check if field is present
+    if "date" not in data:
+           return jsonify({
+            "error": "Missing required field 'date'"
+        }), 400
+    
+    # Sort data by date
+    sorted_items = sorted(
+        data,
+        key=lambda item: (item.get('date', ''))
+    )
 
-    # Return sorted races
-    return jsonify(sorted_races)
-
+    # Return sorted data
+    return jsonify(sorted_items)
 
 # Run server
 if __name__ == '__main__':
